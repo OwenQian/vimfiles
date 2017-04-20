@@ -1,6 +1,6 @@
 set relativenumber
 
-set confirm " Ask for confirm instead of failing command nnoremap
+set confirm " Ask for confirm instead of failing command
 
 set scrolloff=3       "Start scrolling this number of lines away from margins
 
