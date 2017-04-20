@@ -1,15 +1,7 @@
-set mouse=a " Allow use of mouse
 set relativenumber
 
 set confirm " Ask for confirm instead of failing command nnoremap
 
-nnoremap <silent> <C-z> :sus<CR> "Remap ctrl+Z to suspend task
-
-nnoremap <silent> [n :NERDTreeToggle<CR>
-
-nnoremap <silent> <leader>q :b#<bar>bd#<CR>
-
-let g:ctrlp_working_path_mode = 0
-let g:ctrlp_switch_buffer = 0
-
 set scrolloff=3       "Start scrolling this number of lines away from margins
+
+let g:ctrlp_use_caching = 1  " Have ctrlP cache
