@@ -7,31 +7,30 @@ call vundle#begin()
 
 " Core
 Plugin 'VundleVim/Vundle.vim'
-Plugin 'scrooloose/nerdtree'
-Plugin 'vim-syntastic/syntastic'
 Plugin 'altercation/vim-colors-solarized'
 Plugin 'ctrlpvim/ctrlp.vim'
+Plugin 'scrooloose/nerdtree'
+Plugin 'vim-syntastic/syntastic'
 Plugin 'tpope/vim-fugitive'
 Plugin 'blueyed/vim-diminactive'
 
+" Appearance
+Plugin 'itchyny/lightline.vim'   "colorful bar at the bottom
+Plugin 'xsunsmile/showmarks.git' "show position of marks
+
+" Supplement to motion
+Plugin 'justinmk/vim-sneak'
+Plugin 'vim-scripts/camelcasemotion.git' "allow camelcase motion
+
+" Silver searcher (faster than ctrlP search)
+Plugin 'rking/ag.vim'
+
 " Python
-Plugin 'vim-scripts/indentpython.vim'
+" Makes python indentation more consistent with PEP8
+Plugin 'Vimjas/vim-python-pep8-indent'
 
 call vundle#end()
 filetype plugin indent on
-
-" ############# Ctrl-P ##############
-let g:ctrlp_switch_buffer = 0
-nnoremap <silent> ,t :CtrlP<CR>
-nnoremap <silent> ,b :CtrlPBuffer<cr>
-nnoremap <silent> <C-S-P> :ClearCtrlPCache<cr>
-" ctrl-shift-m to jump to a method
-nnoremap <silent> <C-S-M> :CtrlPBufTag<CR>
-
-" ############# NERDTree ############
-let NERDTreeMinimalUI = 1
-let NERDTreeDirArrows = 1
-let g:NERDTreeWinSize = 30
 
 " Use Ctrl-\ to open nerdtree
 function! OpenNerdTree()
@@ -43,16 +42,13 @@ function! OpenNerdTree()
 endfunction
 nnoremap <silent> <C-\> :call OpenNerdTree()<CR>
 
-" ############# Syntastic ############
-" have syntastic be in passive mode by default
-let g:syntastic_mode_map = { 'mode': 'passive' }
-
 " ############# General Config ###########
 set number			                "Line numbers
 set relativenumber              "Show line numbers relative to current line
 colo solarized
 set bg=dark
-set guifont=Consolas:h14
+"set guifont=Consolas:h14        "scotia
+set guifont=Inconsolata:h18     "use this at home
 syntax on
 set hidden                      "Allow buffers to exist in backgroun
 set backspace=indent,eol,start  "Allow backspacing over eol in insert mode
@@ -94,17 +90,18 @@ set sidescrolloff=15
 set sidescroll=1
 
 "Mark unnecessary whitespace
-au BufRead,BufNewFile *.py,*.pyw,*.c,*.h match BadWhitespace /\s\+$/
+"highlight BadWhitespace
+"au BufRead,BufNewFile *.py,*.pyw,*.c,*.h match BadWhitespace /\s\+$/
 
 " ############## Python settings ##############
 au BufNewFile,BufRead *.py
-    \ set tabstop=4
-    \ set softtabstop=4
-    \ set shiftwidth=4
-    \ set textwidth=79
-    \ set expandtab
-    \ set autoindent
-    \ set fileformat=unix
+      \ set tabstop=4
+      \ set softtabstop=4
+      \ set shiftwidth=4
+      \ set textwidth=79
+      \ set expandtab
+      \ set autoindent
+      \ set fileformat=unix
 
 " ############# Remappings ###########
 let mapleader = ","
@@ -152,17 +149,86 @@ nmap <silent> <leader>qo :copen<CR>
 nnoremap <C-w>f :sp +e<cfile><CR>
 nnoremap <C-w>gf :tabe<cfile><CR>
 
+" ############# Ctrl-P ##############
+let g:ctrlp_switch_buffer = 0
+nnoremap <silent> <leader>t :CtrlP<CR>
+nnoremap <silent> <leader>b :CtrlPBuffer<cr>
+nnoremap <silent> <C-S-P> :ClearCtrlPCache<cr>
+" ctrl-shift-m to jump to a method
+nnoremap <silent> <C-S-M> :CtrlPBufTag<CR>
+
+if executable('ag')
+  " Use ag in CtrlP for listing files. Lightning fast and respects .gitignore
+  let g:ctrlp_user_command =
+        \ 'ag %s --files-with-matches -g "" --ignore "\.git$\|\.hg$\|\.svn$"'
+
+  " ag is fast enough that CtrlP doesn't need to cache
+  let g:ctrlp_use_caching = 0
+else
+  " Fall back to using git ls-files if Ag is not available
+  let g:ctrlp_custom_ignore = '\.git$\|\.hg$\|\.svn$'
+  let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files . --cached --exclude-standard --others']
+endif
+
+" ############# NERDTree ############
+let NERDTreeMinimalUI = 1
+let NERDTreeDirArrows = 1
+
+" ############# Syntastic ############
+" have syntastic be in passive mode by default
+let g:syntastic_mode_map = { 'mode': 'passive' }
+
+" ############# Deoplete ############
+let g:deoplete#enable_at_startup = 1
+let g:deoplete#enable_camel_case = 1
+let g:deoplete#enable_smart_case = 1
+let g:deoplete#max_list = 5 "Default number of completions
+
+" ############# Lightline ###########
+let g:lightline = {
+      \ 'colorscheme': 'solarized',
+      \ 'active': {
+      \   'left': [ [ 'mode', 'paste' ],
+      \             [ 'fugitive', 'readonly', 'filename', 'modified' ] ]
+      \ },
+      \ 'component_function': {
+      \   'fugitive': 'MyFugitive',
+      \   'readonly': 'MyReadonly',
+      \   'filename': 'MyFilename',
+      \ },
+      \ 'separator': { 'left': '⮀', 'right': '⮂' },
+      \ 'subseparator': { 'left': '⮁', 'right': '⮃' }
+      \ }
+
+set laststatus=2 " use status bar even with single buffer
+
+" ############### Camelcase Motion ##########
+map W <Plug>CamelCaseMotion_w
+map B <Plug>CamelCaseMotion_b
+map E <Plug>CamelCaseMotion_e
+
+sunmap W
+sunmap B
+sunmap E
+
+" ############## Showmarks #################
+nmap <Space> <Plug>SneakForward
+
+" ############## Showmarks #################
+" Get rid of the weird brace symbols
+let g:showmarks_include = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXY"
+
 " ############### Scripts ############
 function! <SID>StripTrailingWhitespaces()
-    " Preparation: save last search, and cursor position.
-    let _s=@/
-    let l = line(".")
-    let c = col(".")
-    " Do the business:
-    %s/\s\+$//e
-    " Clean up: restore previous search history, and cursor position
-    let @/=_s
-    call cursor(l, c)
+  " Preparation: save last search, and cursor position.
+  let _s=@/
+  let l = line(".")
+  let c = col(".")
+  " Do the business:
+  %s/\s\+$//e
+  " Clean up: restore previous search history, and cursor position
+  let @/=_s
+  call cursor(l, c)
 endfunction
 command! StripTrailingWhitespaces call <SID>StripTrailingWhitespaces()
 nmap ,w :StripTrailingWhitespaces<CR>
