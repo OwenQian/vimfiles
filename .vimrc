@@ -17,6 +17,7 @@ Plugin 'blueyed/vim-diminactive'
 " code snippets
 Plugin 'SirVer/ultisnips'
 Plugin 'honza/vim-snippets'
+Plugin 'ervandew/supertab'      "Make tab usable for everything
 
 " code completion
 Plugin 'maralla/completor.vim'
@@ -120,6 +121,9 @@ nnoremap // :noh<CR>
 "Movement
 " go to last edit location
 nnoremap <leader>. '.
+" switch the functions of 0 and ^
+nnoremap 0 ^
+nnoremap ^ 0
 
 "Splits
 nnoremap <silent> ss :split<CR>
@@ -222,6 +226,8 @@ let g:showmarks_include = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXY"
 
 " ############### Ultisnips ############
 let g:UltiSnipsExpandTrigger="<tab>"
+let g:UltiSnipsJumpForwardTrigger="<tab>"
+
 
 " ############### Scripts ############
 function! <SID>StripTrailingWhitespaces()
@@ -237,3 +243,6 @@ function! <SID>StripTrailingWhitespaces()
 endfunction
 command! StripTrailingWhitespaces call <SID>StripTrailingWhitespaces()
 nmap <leader>w :StripTrailingWhitespaces<CR>
+
+" map F9 to run the python script
+autocmd FileType python nnoremap <buffer> <F9> :execute "!py" shellescape(@%, 1)<CR>
