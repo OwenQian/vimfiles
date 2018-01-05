@@ -14,6 +14,13 @@ Plugin 'vim-syntastic/syntastic'
 Plugin 'tpope/vim-fugitive'
 Plugin 'blueyed/vim-diminactive'
 
+" code snippets
+Plugin 'SirVer/ultisnips'
+Plugin 'honza/vim-snippets'
+
+" code completion
+Plugin 'maralla/completor.vim'
+
 " Appearance
 Plugin 'itchyny/lightline.vim'   "colorful bar at the bottom
 Plugin 'xsunsmile/showmarks.git' "show position of marks
@@ -43,22 +50,22 @@ endfunction
 nnoremap <silent> <C-\> :call OpenNerdTree()<CR>
 
 " ############# General Config ###########
-set number			                "Line numbers
+set number                      "Line numbers
 set relativenumber              "Show line numbers relative to current line
 colo solarized
 set bg=dark
-"set guifont=Consolas:h14        "scotia
-set guifont=Inconsolata:h18     "use this at home
+set guifont=Consolas:h14        "scotia
+"set guifont=Inconsolata:h18    "use this at home
 syntax on
 set hidden                      "Allow buffers to exist in backgroun
 set backspace=indent,eol,start  "Allow backspacing over eol in insert mode
-set history=1000		            "Store long history
+set history=1000                "Store long history
 set showmode                    "Show mode at the bottom
 set showcmd                     "Show incomplete cmds at bottom
-set gcr=a:blinkon0 		          "Disable blinking cursor
-set visualbell			            "No sounds
-set autoread  			            "reload files that have changed outside vim
-set wildmenu 			              "Better command line completion
+set gcr=a:blinkon0              "Disable blinking cursor
+set visualbell                  "No sounds
+set autoread                    "reload files that have changed outside vim
+set wildmenu                    "Better command line completion
 set encoding=utf-8
 
 set nowrap
@@ -67,8 +74,9 @@ set linebreak
 " Search
 set incsearch                   "Show results while typing
 set hlsearch                    "Highlight search
+"Ignore search case unless there's a capital
 set ignorecase
-set smartcase                   "Ignore search case unless there's a capital
+set smartcase                   
 
 "Swap files
 set noswapfile
@@ -85,7 +93,7 @@ set tabstop=2
 set expandtab
 
 "Scrolling
-set scrolloff=8         "Start scrolling when we're 8 lines away from margins
+set scrolloff=8      "Start scrolling when we're 8 lines away from margins
 set sidescrolloff=15
 set sidescroll=1
 
@@ -95,22 +103,23 @@ set sidescroll=1
 
 " ############## Python settings ##############
 au BufNewFile,BufRead *.py
-      \ set tabstop=4
-      \ set softtabstop=4
-      \ set shiftwidth=4
-      \ set textwidth=79
-      \ set expandtab
-      \ set autoindent
+      \ set tabstop=4      |
+      \ set softtabstop=4  |
+      \ set shiftwidth=4   |
+      \ set textwidth=79   |
+      \ set expandtab      |
+      \ set autoindent     |
       \ set fileformat=unix
 
 " ############# Remappings ###########
 let mapleader = ","
 
+" use // to unhighlight search
 nnoremap // :noh<CR>
 
 "Movement
 " go to last edit location
-nnoremap ,. '.
+nnoremap <leader>. '.
 
 "Splits
 nnoremap <silent> ss :split<CR>
@@ -120,7 +129,7 @@ nnoremap <C-K> <C-W><C-K>
 nnoremap <C-L> <C-W><C-L>
 nnoremap <C-H> <C-W><C-H>
 
-"Buffers
+"Buffers Navigation
 nnoremap <silent> <leader>z :bp<CR>
 nnoremap <silent> <leader>x :bn<CR>
 
@@ -134,8 +143,10 @@ vnoremap <C-X> "*x
 " paste has to work in cmds and in general
 cmap <C-V> <C-R>*
 imap <C-V> <C-R>*
+" in normal mode, add a shift so it doesn't conflict with visual block mode
+nmap <C-Q> "*p
 " copy current filename into system clipboard
-nnoremap <silent> ,cf :let @* = expand("%:~")<CR>
+nnoremap <silent> <leader>cf :let @* = expand("%:~")<CR>
 
 "Quickfix List
 " remap ctrl-x and z to navigate quickfix error list
@@ -153,9 +164,8 @@ nnoremap <C-w>gf :tabe<cfile><CR>
 let g:ctrlp_switch_buffer = 0
 nnoremap <silent> <leader>t :CtrlP<CR>
 nnoremap <silent> <leader>b :CtrlPBuffer<cr>
-nnoremap <silent> <C-S-P> :ClearCtrlPCache<cr>
 " ctrl-shift-m to jump to a method
-nnoremap <silent> <C-S-M> :CtrlPBufTag<CR>
+nnoremap <silent> <C-M> :CtrlPBufTag<CR>
 
 if executable('ag')
   " Use ag in CtrlP for listing files. Lightning fast and respects .gitignore
@@ -178,12 +188,6 @@ let NERDTreeDirArrows = 1
 " have syntastic be in passive mode by default
 let g:syntastic_mode_map = { 'mode': 'passive' }
 
-" ############# Deoplete ############
-let g:deoplete#enable_at_startup = 1
-let g:deoplete#enable_camel_case = 1
-let g:deoplete#enable_smart_case = 1
-let g:deoplete#max_list = 5 "Default number of completions
-
 " ############# Lightline ###########
 let g:lightline = {
       \ 'colorscheme': 'solarized',
@@ -196,8 +200,6 @@ let g:lightline = {
       \   'readonly': 'MyReadonly',
       \   'filename': 'MyFilename',
       \ },
-      \ 'separator': { 'left': '⮀', 'right': '⮂' },
-      \ 'subseparator': { 'left': '⮁', 'right': '⮃' }
       \ }
 
 set laststatus=2 " use status bar even with single buffer
@@ -218,6 +220,9 @@ nmap <Space> <Plug>SneakForward
 " Get rid of the weird brace symbols
 let g:showmarks_include = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXY"
 
+" ############### Ultisnips ############
+let g:UltiSnipsExpandTrigger="<tab>"
+
 " ############### Scripts ############
 function! <SID>StripTrailingWhitespaces()
   " Preparation: save last search, and cursor position.
@@ -231,4 +236,4 @@ function! <SID>StripTrailingWhitespaces()
   call cursor(l, c)
 endfunction
 command! StripTrailingWhitespaces call <SID>StripTrailingWhitespaces()
-nmap ,w :StripTrailingWhitespaces<CR>
+nmap <leader>w :StripTrailingWhitespaces<CR>
