@@ -8,6 +8,7 @@ call vundle#begin()
 " Core
 Plugin 'VundleVim/Vundle.vim'
 Plugin 'altercation/vim-colors-solarized'
+Plugin 'morhetz/gruvbox'
 Plugin 'ctrlpvim/ctrlp.vim'
 Plugin 'scrooloose/nerdtree'
 Plugin 'vim-syntastic/syntastic'
@@ -15,9 +16,13 @@ Plugin 'tpope/vim-fugitive'
 Plugin 'blueyed/vim-diminactive'
 
 " code snippets
-Plugin 'SirVer/ultisnips'
-Plugin 'honza/vim-snippets'
-Plugin 'ervandew/supertab'      "Make tab usable for everything
+Plugin 'MarcWeber/vim-addon-mw-utils' " necessary for snipmate
+Plugin 'tomtom/tlib_vim'
+Plugin 'garbas/vim-snipmate'
+Plugin 'honza/vim-snippets'           " snippets library
+
+" make tab the universal code completer
+Plugin 'ervandew/supertab'            
 
 " code completion
 Plugin 'maralla/completor.vim'
@@ -53,7 +58,7 @@ nnoremap <silent> <C-\> :call OpenNerdTree()<CR>
 " ############# General Config ###########
 set number                      "Line numbers
 set relativenumber              "Show line numbers relative to current line
-colo solarized
+colo gruvbox
 set bg=dark
 set guifont=Consolas:h14        "scotia
 "set guifont=Inconsolata:h18    "use this at home
@@ -224,10 +229,8 @@ nmap <Space> <Plug>SneakForward
 " Get rid of the weird brace symbols
 let g:showmarks_include = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXY"
 
-" ############### Ultisnips ############
-let g:UltiSnipsExpandTrigger="<tab>"
-let g:UltiSnipsJumpForwardTrigger="<tab>"
-
+" ############### SuperTab ############
+let g:SuperTabDefaultCompletionType = "<c-n>"
 
 " ############### Scripts ############
 function! <SID>StripTrailingWhitespaces()
