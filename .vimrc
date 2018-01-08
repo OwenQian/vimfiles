@@ -152,8 +152,7 @@ vnoremap <C-X> "*x
 " paste has to work in cmds and in general
 cmap <C-V> <C-R>*
 imap <C-V> <C-R>*
-" in normal mode, add a shift so it doesn't conflict with visual block mode
-nmap <C-Q> "*p
+
 " copy current filename into system clipboard
 nnoremap <silent> <leader>cf :let @* = expand("%:~")<CR>
 
@@ -169,13 +168,18 @@ nmap <silent> <leader>qo :copen<CR>
 nnoremap <C-w>f :sp +e<cfile><CR>
 nnoremap <C-w>gf :tabe<cfile><CR>
 
-" ############# Ctrl-P ##############
-let g:ctrlp_switch_buffer = 0
+"CtrlP
 nnoremap <silent> <leader>t :CtrlP<CR>
-nnoremap <silent> <leader>b :CtrlPBuffer<cr>
-" ctrl-shift-m to jump to a method
+
+" ctrl-m to jump to a method
 nnoremap <silent> <C-M> :CtrlPBufTag<CR>
 
+" ############# Ctrl-P ##############
+let g:ctrlp_switch_buffer = 0
+
+if exists("g:ctrlp_user_command")
+  unlet g:ctrlp_user_command
+endif
 if executable('ag')
   " Use ag in CtrlP for listing files. Lightning fast and respects .gitignore
   let g:ctrlp_user_command =
@@ -199,7 +203,7 @@ let g:syntastic_mode_map = { 'mode': 'passive' }
 
 " ############# Lightline ###########
 let g:lightline = {
-      \ 'colorscheme': 'solarized',
+      \ 'colorscheme': 'gruvbox',
       \ 'active': {
       \   'left': [ [ 'mode', 'paste' ],
       \             [ 'fugitive', 'readonly', 'filename', 'modified' ] ]
@@ -248,4 +252,4 @@ command! StripTrailingWhitespaces call <SID>StripTrailingWhitespaces()
 nmap <leader>w :StripTrailingWhitespaces<CR>
 
 " map F9 to run the python script
-autocmd FileType python nnoremap <buffer> <F9> :execute "!py" shellescape(@%, 1)<CR>
+"autocmd FileType python nnoremap <buffer> <F9> :execute "!py" shellescape(@%, 1)<CR>
