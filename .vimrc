@@ -168,30 +168,10 @@ nnoremap <C-w>gf :tabe<cfile><CR>
 " Open ctrlP
 nnoremap <silent> <leader>t :CtrlPMixed<CR>
 " Buffer search
-nnoremap <silent> ,b :CloseSingleConque<CR>:CtrlPBuffer<cr>
-nnoremap <silent> <C-b> :CloseSingleConque<CR>:CtrlPBuffer<cr>
+nnoremap <silent> ,b :CtrlPBuffer<cr>
 
 " ctrl-m to jump to a method
 nnoremap <silent> <C-M> :CtrlPBufTag<CR>
-
-" ############# CtrlP ##############
-let g:ctrlp_switch_buffer = 0
-
-if exists("g:ctrlp_user_command")
-  unlet g:ctrlp_user_command
-endif
-if executable('ag')
-  " Use ag in CtrlP for listing files. Lightning fast and respects .gitignore
-  let g:ctrlp_user_command =
-        \ 'ag %s --files-with-matches -g "" --ignore "\.git$\|\.hg$\|\.svn$"'
-
-  " ag is fast enough that CtrlP doesn't need to cache
-  let g:ctrlp_use_caching = 0
-else
-  " Fall back to using git ls-files if Ag is not available
-  let g:ctrlp_custom_ignore = '\.git$\|\.hg$\|\.svn$'
-  let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files . --cached --exclude-standard --others']
-endif
 
 " ############# NERDTree ############
 let NERDTreeMinimalUI = 1
@@ -200,22 +180,6 @@ let NERDTreeDirArrows = 1
 " ############# Syntastic ############
 " have syntastic be in passive mode by default
 let g:syntastic_mode_map = { 'mode': 'passive' }
-
-" ############# Lightline ###########
-let g:lightline = {
-      \ 'colorscheme': 'gruvbox',
-      \ 'active': {
-      \   'left': [ [ 'mode', 'paste' ],
-      \             [ 'fugitive', 'readonly', 'filename', 'modified' ] ]
-      \ },
-      \ 'component_function': {
-      \   'fugitive': 'MyFugitive',
-      \   'readonly': 'MyReadonly',
-      \   'filename': 'MyFilename',
-      \ },
-      \ }
-
-set laststatus=2 " use status bar even with single buffer
 
 " ############### Camelcase Motion ##########
 map W <Plug>CamelCaseMotion_w
@@ -236,6 +200,13 @@ let g:showmarks_include = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXY"
 " ############### SuperTab ############
 let g:SuperTabDefaultCompletionType = "<c-n>"
 
-" ############### Scripts ############
+" ############### Settings Files ############
+" Note: change this to the proper path for the given computer
+let settings_dir = "~/owen_vim/settings"
 
-source scripts.vim
+" source all .vim files in the settings_dir
+" Note: globpath expands all the wildcards in a given dir
+" Note: split turns the expanded strings into a List to be iterated over
+for fpath in split(globpath(settings_dir, '*.vim'), '\n')
+  execute "source" fpath
+endfor
