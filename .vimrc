@@ -63,7 +63,7 @@ set bg=dark
 set guifont=Consolas:h14        "scotia
 "set guifont=Inconsolata:h18    "use this at home
 syntax on
-set hidden                      "Allow buffers to exist in backgroun
+set hidden                      "Allow buffers to exist in background
 set backspace=indent,eol,start  "Allow backspacing over eol in insert mode
 set history=1000                "Store long history
 set showmode                    "Show mode at the bottom
@@ -102,10 +102,6 @@ set expandtab
 set scrolloff=8      "Start scrolling when we're 8 lines away from margins
 set sidescrolloff=15
 set sidescroll=1
-
-"Mark unnecessary whitespace
-"highlight BadWhitespace
-"au BufRead,BufNewFile *.py,*.pyw,*.c,*.h match BadWhitespace /\s\+$/
 
 " ############## Python settings ##############
 au BufNewFile,BufRead *.py
@@ -169,12 +165,16 @@ nnoremap <C-w>f :sp +e<cfile><CR>
 nnoremap <C-w>gf :tabe<cfile><CR>
 
 "CtrlP
-nnoremap <silent> <leader>t :CtrlP<CR>
+" Open ctrlP
+nnoremap <silent> <leader>t :CtrlPMixed<CR>
+" Buffer search
+nnoremap <silent> ,b :CloseSingleConque<CR>:CtrlPBuffer<cr>
+nnoremap <silent> <C-b> :CloseSingleConque<CR>:CtrlPBuffer<cr>
 
 " ctrl-m to jump to a method
 nnoremap <silent> <C-M> :CtrlPBufTag<CR>
 
-" ############# Ctrl-P ##############
+" ############# CtrlP ##############
 let g:ctrlp_switch_buffer = 0
 
 if exists("g:ctrlp_user_command")
@@ -237,19 +237,5 @@ let g:showmarks_include = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXY"
 let g:SuperTabDefaultCompletionType = "<c-n>"
 
 " ############### Scripts ############
-function! <SID>StripTrailingWhitespaces()
-  " Preparation: save last search, and cursor position.
-  let _s=@/
-  let l = line(".")
-  let c = col(".")
-  " Do the business:
-  %s/\s\+$//e
-  " Clean up: restore previous search history, and cursor position
-  let @/=_s
-  call cursor(l, c)
-endfunction
-command! StripTrailingWhitespaces call <SID>StripTrailingWhitespaces()
-nmap <leader>w :StripTrailingWhitespaces<CR>
 
-" map F9 to run the python script
-"autocmd FileType python nnoremap <buffer> <F9> :execute "!py" shellescape(@%, 1)<CR>
+source scripts.vim
