@@ -176,6 +176,7 @@ nnoremap <silent> <C-M> :CtrlPBufTag<CR>
 " ############# NERDTree ############
 let NERDTreeMinimalUI = 1
 let NERDTreeDirArrows = 1
+let g:NERDTreeWinSize = 30
 
 " ############# Syntastic ############
 " have syntastic be in passive mode by default
@@ -202,7 +203,8 @@ let g:SuperTabDefaultCompletionType = "<c-n>"
 
 " ############### Settings Files ############
 " Note: change this to the proper path for the given computer
-let settings_dir = "~/owen_vim/settings"
+"let settings_dir = "~/owen_vim/settings"
+let settings_dir = "~/.yadr/owen_config/settings"
 
 " source all .vim files in the settings_dir
 " Note: globpath expands all the wildcards in a given dir
