@@ -1,4 +1,5 @@
 " ############# Lightline ###########
+" Note: some of the lightline symbols aren't supported
 " this configures what things are displayed in lightline
 let g:lightline = {
       \ 'colorscheme': 'gruvbox',
@@ -11,9 +12,10 @@ let g:lightline = {
       \   'readonly': 'MyReadonly',
       \   'filename': 'MyFilename',
       \ },
+      \ 'separator': { 'left': '⮀', 'right': '⮂' },
+      \ 'subseparator': { 'left': '⮁', 'right': '⮃' }
       \ }
 
-" TODO: replace the ? symbol with something else
 function! MyFugitive()
   if exists("*fugitive#head")
     let _ = fugitive#head()
@@ -26,7 +28,7 @@ function! MyReadonly()
   if &filetype == "help"
     return ""
   elseif &readonly
-    return "& "
+    return "⭤ "
   else
     return ""
   endif
