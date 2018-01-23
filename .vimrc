@@ -34,6 +34,7 @@ Plugin 'xsunsmile/showmarks.git' "show position of marks
 " Supplement to motion
 Plugin 'justinmk/vim-sneak'
 Plugin 'vim-scripts/camelcasemotion.git' "allow camelcase motion
+Plugin 'tpope/vim-surround'
 
 " Silver searcher (faster than ctrlP search)
 Plugin 'rking/ag.vim'
@@ -92,26 +93,18 @@ set nowb
 "Indentation
 set autoindent
 set smartindent
-set smarttab
-set shiftwidth=2
-set softtabstop=2
-set tabstop=2
-set expandtab
+" Use shiftwidth for number of spaces inserted by tab at the start of a line
+" and when backspacing
+set smarttab         
+set shiftwidth=4     " The number of spaces to use when indenting e.g., >>
+set softtabstop=4    " The number of spaces that a tab counts for when editing
+set tabstop=4        " The number of spaces that a tab in the file counts for
+set expandtab        " Expand tabs into the appropriate amount of spaces
 
 "Scrolling
 set scrolloff=8      "Start scrolling when we're 8 lines away from margins
 set sidescrolloff=15
 set sidescroll=1
-
-" ############## Python settings ##############
-au BufNewFile,BufRead *.py
-      \ set tabstop=4      |
-      \ set softtabstop=4  |
-      \ set shiftwidth=4   |
-      \ set textwidth=79   |
-      \ set expandtab      |
-      \ set autoindent     |
-      \ set fileformat=unix
 
 " ############# Remappings ###########
 let mapleader = ","
@@ -168,10 +161,10 @@ nnoremap <C-w>gf :tabe<cfile><CR>
 " Open ctrlP
 nnoremap <silent> <leader>t :CtrlPMixed<CR>
 " Buffer search
-nnoremap <silent> ,b :CtrlPBuffer<cr>
+nnoremap <silent> <leader>b :CtrlPBuffer<CR>
 
-" ctrl-m to jump to a method
-nnoremap <silent> <C-M> :CtrlPBufTag<CR>
+nnoremap <silent> Q :q<CR>
+nnoremap <silent> <leader>q :b#<bar>bd#<CR>
 
 " ############# NERDTree ############
 let NERDTreeMinimalUI = 1
@@ -203,8 +196,8 @@ let g:SuperTabDefaultCompletionType = "<c-n>"
 
 " ############### Settings Files ############
 " Note: change this to the proper path for the given computer
-"let settings_dir = "~/owen_vim/settings"
-let settings_dir = "~/.yadr/owen_config/settings"
+let settings_dir = "~/owen_vim/settings"
+"let settings_dir = "~/.yadr/owen_config/settings"
 
 " source all .vim files in the settings_dir
 " Note: globpath expands all the wildcards in a given dir
