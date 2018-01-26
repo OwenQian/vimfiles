@@ -18,8 +18,11 @@ autocmd FileType python nnoremap <buffer> <F9> :execute "!py" shellescape(@%, 1)
 
 " function to make vim more word processing friendly
 func! WordProcessorMode() 
+  " <buffer> to make these mappings local
+  map <buffer> j gj
+  map <buffer> k gk
   setlocal formatoptions=1 
-  setlocal noexpandtab 
+  " setlocal noexpandtab 
   setlocal spell spelllang=en_us 
   set thesaurus+=/Users/sbrown/.vim/thesaurus/mthesaur.txt
   set complete+=s

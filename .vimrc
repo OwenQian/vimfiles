@@ -163,6 +163,9 @@ nnoremap <silent> <leader>t :CtrlPMixed<CR>
 " Buffer search
 nnoremap <silent> <leader>b :CtrlPBuffer<CR>
 
+"Silver Searcher
+nnoremap <leader>gg :Ag ""<Left>
+
 nnoremap <silent> Q :q<CR>
 nnoremap <silent> <leader>q :b#<bar>bd#<CR>
 
