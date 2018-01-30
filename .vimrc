@@ -1,3 +1,5 @@
+set fileformats=unix,dos
+set fileformat=unix
 " ############# Vundle ###########
 set nocompatible              " be iMproved, required
 filetype off                  " required
@@ -25,7 +27,7 @@ Plugin 'honza/vim-snippets'           " snippets library
 Plugin 'ervandew/supertab'            
 
 " code completion
-Plugin 'maralla/completor.vim'
+Plugin 'davidhalter/jedi-vim'    " code completion and navigator for python
 
 " Appearance
 Plugin 'itchyny/lightline.vim'   "colorful bar at the bottom
@@ -130,6 +132,7 @@ nnoremap <C-H> <C-W><C-H>
 "Buffers Navigation
 nnoremap <silent> <leader>z :bp<CR>
 nnoremap <silent> <leader>x :bn<CR>
+nnoremap <silent> <leader>a :b#<CR>
 
 "Save
 nnoremap <C-S> :w<CR>
