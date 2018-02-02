@@ -38,7 +38,7 @@ Plugin 'justinmk/vim-sneak'
 Plugin 'vim-scripts/camelcasemotion.git' "allow camelcase motion
 Plugin 'tpope/vim-surround'
 
-" Silver searcher (faster than ctrlP search)
+" Silver searcher wrapper (faster than ctrlP search)
 Plugin 'rking/ag.vim'
 
 " Python
@@ -160,17 +160,12 @@ nmap <silent> <leader>qo :copen<CR>
 nnoremap <C-w>f :sp +e<cfile><CR>
 nnoremap <C-w>gf :tabe<cfile><CR>
 
-"CtrlP
-" Open ctrlP
-nnoremap <silent> <leader>t :CtrlPMixed<CR>
-" Buffer search
-nnoremap <silent> <leader>b :CtrlPBuffer<CR>
-
 "Silver Searcher
 nnoremap <leader>gg :Ag ""<Left>
 
 nnoremap <silent> Q :q<CR>
 nnoremap <silent> <leader>q :b#<bar>bd#<CR>
+nnoremap <silent> <C-Q> :bd<CR>
 
 " ############# NERDTree ############
 let NERDTreeMinimalUI = 1

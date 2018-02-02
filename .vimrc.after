@@ -1,7 +1,0 @@
-set relativenumber
-
-set confirm " Ask for confirm instead of failing command
-
-set scrolloff=3       "Start scrolling this number of lines away from margins
-
-let g:ctrlp_use_caching = 1  " Have ctrlP cache
