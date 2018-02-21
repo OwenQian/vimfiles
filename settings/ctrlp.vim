@@ -17,11 +17,3 @@ else
   let g:ctrlp_custom_ignore = '\.git$\|\.hg$\|\.svn$'
   let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files . --cached --exclude-standard --others']
 endif
-
-" Mappings
-"CtrlP
-nnoremap <silent> <leader>t :CtrlP<CR>
-" Buffer search
-nnoremap <silent> <leader>b :CtrlPBuffer<CR>
-" used to find functions
-nnoremap <silent> <leader>f :CtrlPBufTag<CR>

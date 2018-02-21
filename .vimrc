@@ -140,6 +140,9 @@ tnoremap <C-H> <C-W><C-H>
 nnoremap <silent> <leader>z :bp<CR>
 nnoremap <silent> <leader>x :bn<CR>
 nnoremap <silent> <leader>a :b#<CR>
+nnoremap <silent> Q :q<CR>
+nnoremap <silent> <leader>q :b#<bar>bd#<CR>
+nnoremap <silent> <C-T> :bd<CR>
 
 " copy current filename into system clipboard
 nnoremap <silent> <leader>cf :let @* = expand("%:~")<CR>
@@ -152,18 +155,16 @@ nnoremap <silent> <leader>cf :let @* = expand("%:~")<CR>
 "nmap <silent> <leader>qc :cclose<CR>
 "nmap <silent> <leader>qo :copen<CR>
 
-"CtrlP
-" Open ctrlP
+" Search
+" CtrlP
 nnoremap <silent> <leader>t :CtrlP<CR>
-" Buffer search
+"Buffer search
 nnoremap <silent> <leader>b :CtrlPBuffer<CR>
+"used to find functions
+nnoremap <silent> <leader>f :CtrlPBufTag<CR>
 
-"Silver Searcher
+" Silver Searcher
 nnoremap <leader>gg :Ag ""<Left>
-
-nnoremap <silent> Q :q<CR>
-nnoremap <silent> <leader>q :b#<bar>bd#<CR>
-nnoremap <silent> <C-Q> :bd<CR>
 
 " ############# NERDTree ############
 let NERDTreeMinimalUI = 1
