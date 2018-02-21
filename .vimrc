@@ -38,7 +38,7 @@ Plugin 'xsunsmile/showmarks.git' "show position of marks
 Plugin 'justinmk/vim-sneak'
 Plugin 'vim-scripts/camelcasemotion.git' "allow camelcase motion
 
-" Silver searcher (faster than ctrlP search)
+" Silver searcher wrapper (faster than ctrlP search)
 Plugin 'rking/ag.vim'
 
 " Python
@@ -163,6 +163,7 @@ nnoremap <leader>gg :Ag ""<Left>
 
 nnoremap <silent> Q :q<CR>
 nnoremap <silent> <leader>q :b#<bar>bd#<CR>
+nnoremap <silent> <C-Q> :bd<CR>
 
 " ############# NERDTree ############
 let NERDTreeMinimalUI = 1
