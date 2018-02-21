@@ -9,13 +9,14 @@ call vundle#begin()
 
 " Core
 Plugin 'VundleVim/Vundle.vim'
-Plugin 'altercation/vim-colors-solarized'
+"Plugin 'altercation/vim-colors-solarized'
 Plugin 'morhetz/gruvbox'
 Plugin 'ctrlpvim/ctrlp.vim'
 Plugin 'scrooloose/nerdtree'
 Plugin 'vim-syntastic/syntastic'
 Plugin 'tpope/vim-fugitive'
 Plugin 'blueyed/vim-diminactive'
+Plugin 'tpope/vim-surround'
 
 " code snippets
 Plugin 'MarcWeber/vim-addon-mw-utils' " necessary for snipmate
@@ -36,7 +37,6 @@ Plugin 'xsunsmile/showmarks.git' "show position of marks
 " Supplement to motion
 Plugin 'justinmk/vim-sneak'
 Plugin 'vim-scripts/camelcasemotion.git' "allow camelcase motion
-Plugin 'tpope/vim-surround'
 
 " Silver searcher (faster than ctrlP search)
 Plugin 'rking/ag.vim'
@@ -76,6 +76,7 @@ set visualbell                  "No sounds
 set autoread                    "reload files that have changed outside vim
 set wildmenu                    "Better command line completion
 set encoding=utf-8
+set mouse=a                     "Allow mouse clicking
 
 set nowrap
 set linebreak
@@ -129,40 +130,31 @@ nnoremap <C-K> <C-W><C-K>
 nnoremap <C-L> <C-W><C-L>
 nnoremap <C-H> <C-W><C-H>
 
+" Mappings to easily navigate the terminal
+tnoremap <C-J> <C-W><C-J>
+tnoremap <C-K> <C-W><C-K>
+tnoremap <C-L> <C-W><C-L>
+tnoremap <C-H> <C-W><C-H>
+
 "Buffers Navigation
 nnoremap <silent> <leader>z :bp<CR>
 nnoremap <silent> <leader>x :bn<CR>
 nnoremap <silent> <leader>a :b#<CR>
-
-"Save
-nnoremap <C-S> :w<CR>
-
-"Copy and Paste
-" copy and cut are mapped in visual mode (selected text)
-vnoremap <C-C> "*y
-vnoremap <C-X> "*x
-" paste has to work in cmds and in general
-cmap <C-V> <C-R>*
-imap <C-V> <C-R>*
 
 " copy current filename into system clipboard
 nnoremap <silent> <leader>cf :let @* = expand("%:~")<CR>
 
 "Quickfix List
 " remap ctrl-x and z to navigate quickfix error list
-nnoremap <silent> <C-x> :cn<CR>
-nnoremap <silent> <C-z> :cp<CR>
-" open and close quickfix window
-nmap <silent> <leader>qc :cclose<CR>
-nmap <silent> <leader>qo :copen<CR>
-
-" Make gf (go to file) create the file, if not existent
-nnoremap <C-w>f :sp +e<cfile><CR>
-nnoremap <C-w>gf :tabe<cfile><CR>
+"nnoremap <silent> <C-x> :cn<CR>
+"nnoremap <silent> <C-z> :cp<CR>
+"" open and close quickfix window
+"nmap <silent> <leader>qc :cclose<CR>
+"nmap <silent> <leader>qo :copen<CR>
 
 "CtrlP
 " Open ctrlP
-nnoremap <silent> <leader>t :CtrlPMixed<CR>
+nnoremap <silent> <leader>t :CtrlP<CR>
 " Buffer search
 nnoremap <silent> <leader>b :CtrlPBuffer<CR>
 
