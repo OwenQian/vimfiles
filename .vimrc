@@ -17,6 +17,7 @@ Plugin 'vim-syntastic/syntastic'
 Plugin 'tpope/vim-fugitive'
 Plugin 'blueyed/vim-diminactive'
 Plugin 'tpope/vim-surround'
+Plugin 'christoomey/vim-tmux-navigator'
 
 " code snippets
 Plugin 'MarcWeber/vim-addon-mw-utils' " necessary for snipmate
@@ -131,10 +132,10 @@ nnoremap <C-L> <C-W><C-L>
 nnoremap <C-H> <C-W><C-H>
 
 " Mappings to easily navigate the terminal
-tnoremap <C-J> <C-W><C-J>
-tnoremap <C-K> <C-W><C-K>
-tnoremap <C-L> <C-W><C-L>
-tnoremap <C-H> <C-W><C-H>
+"tnoremap <C-J> <C-W><C-J>
+"tnoremap <C-K> <C-W><C-K>
+"tnoremap <C-L> <C-W><C-L>
+"tnoremap <C-H> <C-W><C-H>
 
 "Buffers Navigation
 nnoremap <silent> <leader>z :bp<CR>
