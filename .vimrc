@@ -17,6 +17,7 @@ Plugin 'vim-syntastic/syntastic'
 Plugin 'tpope/vim-fugitive'
 Plugin 'blueyed/vim-diminactive'
 Plugin 'tpope/vim-surround'
+Plugin 'christoomey/vim-tmux-navigator'
 
 " code snippets
 Plugin 'MarcWeber/vim-addon-mw-utils' " necessary for snipmate
@@ -63,8 +64,8 @@ set number                      "Line numbers
 set relativenumber              "Show line numbers relative to current line
 colo gruvbox
 set bg=dark
-set guifont=Consolas:h14        "scotia
-"set guifont=Inconsolata:h18    "use this at home
+"set guifont=Consolas:h14        "scotia
+set guifont=Inconsolata:12    "use this at home
 syntax on
 set hidden                      "Allow buffers to exist in background
 set backspace=indent,eol,start  "Allow backspacing over eol in insert mode
@@ -173,6 +174,9 @@ let g:NERDTreeWinSize = 30
 " ############# Syntastic ############
 " have syntastic be in passive mode by default
 let g:syntastic_mode_map = { 'mode': 'passive' }
+let g:syntastic_cpp_check_header = 1
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 1
 
 " ############### Camelcase Motion ##########
 map W <Plug>CamelCaseMotion_w
@@ -183,6 +187,14 @@ sunmap W
 sunmap B
 sunmap E
 
+" ############### Tmux Navigator ##########
+" Don't allow default mappings
+let g:tmux_navigator_no_mappings = 1
+
+nnoremap <silent> <c-h> :TmuxNavigateLeft<cr>
+nnoremap <silent> <c-j> :TmuxNavigateDown<cr>
+nnoremap <silent> <c-k> :TmuxNavigateUp<cr>
+nnoremap <silent> <c-l> :TmuxNavigateRight<cr>
 " ############## Showmarks #################
 nmap <Space> <Plug>SneakForward
 
@@ -195,8 +207,8 @@ let g:SuperTabDefaultCompletionType = "<c-n>"
 
 " ############### Settings Files ############
 " Note: change this to the proper path for the given computer
-let settings_dir = "~/owen_vim/settings"
-"let settings_dir = "~/.yadr/owen_config/settings"
+"let settings_dir = "~/owen_vim/settings"
+let settings_dir = "~/.yadr/owen_config/settings"
 
 " source all .vim files in the settings_dir
 " Note: globpath expands all the wildcards in a given dir
