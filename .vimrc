@@ -132,10 +132,10 @@ nnoremap <C-L> <C-W><C-L>
 nnoremap <C-H> <C-W><C-H>
 
 " Mappings to easily navigate the terminal
-"tnoremap <C-J> <C-W><C-J>
-"tnoremap <C-K> <C-W><C-K>
-"tnoremap <C-L> <C-W><C-L>
-"tnoremap <C-H> <C-W><C-H>
+tnoremap <C-J> <C-W><C-J>
+tnoremap <C-K> <C-W><C-K>
+tnoremap <C-L> <C-W><C-L>
+tnoremap <C-H> <C-W><C-H>
 
 "Buffers Navigation
 nnoremap <silent> <leader>z :bp<CR>
@@ -208,8 +208,8 @@ let g:SuperTabDefaultCompletionType = "<c-n>"
 
 " ############### Settings Files ############
 " Note: change this to the proper path for the given computer
-"let settings_dir = "~/owen_vim/settings"
-let settings_dir = "~/.yadr/owen_config/settings"
+let settings_dir = "~/vimfiles/settings"
+"let settings_dir = "~/.yadr/owen_config/settings"
 
 " source all .vim files in the settings_dir
 " Note: globpath expands all the wildcards in a given dir
