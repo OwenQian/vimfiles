@@ -46,6 +46,9 @@ Plugin 'rking/ag.vim'
 " Makes python indentation more consistent with PEP8
 Plugin 'Vimjas/vim-python-pep8-indent'
 
+" Go
+Plugin 'fatih/vim-go'
+
 call vundle#end()
 filetype plugin indent on
 
