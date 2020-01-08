@@ -1,0 +1,1 @@
+* q: can be used to see a history of colon commands

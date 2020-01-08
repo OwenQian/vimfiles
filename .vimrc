@@ -50,6 +50,7 @@ Plugin 'Vimjas/vim-python-pep8-indent'
 Plugin 'fatih/vim-go'
 
 call vundle#end()
+"filetype plugin indent on
 filetype plugin indent on
 
 " Use Ctrl-\ to open nerdtree
@@ -67,8 +68,7 @@ set number                      "Line numbers
 set relativenumber              "Show line numbers relative to current line
 colo gruvbox
 set bg=dark
-"set guifont=Consolas:h14        "scotia
-set guifont=Inconsolata:12    "use this at home
+set guifont=Inconsolata-dzForPowerline:h14
 syntax on
 set hidden                      "Allow buffers to exist in background
 set backspace=indent,eol,start  "Allow backspacing over eol in insert mode
