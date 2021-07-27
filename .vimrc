@@ -19,17 +19,11 @@ Plugin 'blueyed/vim-diminactive'
 Plugin 'tpope/vim-surround'
 Plugin 'christoomey/vim-tmux-navigator'
 
-" code snippets
-Plugin 'MarcWeber/vim-addon-mw-utils' " necessary for snipmate
-Plugin 'tomtom/tlib_vim'
-Plugin 'garbas/vim-snipmate'
-Plugin 'honza/vim-snippets'           " snippets library
-
 " make tab the universal code completer
 Plugin 'ervandew/supertab'            
 
-" code completion
-Plugin 'davidhalter/jedi-vim'    " code completion and navigator for python
+"" code completion
+"Plugin 'davidhalter/jedi-vim'    " code completion and navigator for python
 
 " Appearance
 Plugin 'itchyny/lightline.vim'   "colorful bar at the bottom
@@ -42,9 +36,9 @@ Plugin 'vim-scripts/camelcasemotion.git' "allow camelcase motion
 " Silver searcher wrapper (faster than ctrlP search)
 Plugin 'rking/ag.vim'
 
-" Python
-" Makes python indentation more consistent with PEP8
-Plugin 'Vimjas/vim-python-pep8-indent'
+"" Python
+"" Makes python indentation more consistent with PEP8
+"Plugin 'Vimjas/vim-python-pep8-indent'
 
 " Go
 Plugin 'fatih/vim-go'
