@@ -1,5 +1,4 @@
 set fileformats=unix,dos
-set fileformat=unix
 " ############# Vundle ###########
 set nocompatible              " be iMproved, required
 filetype off                  " required
@@ -18,6 +17,7 @@ Plugin 'tpope/vim-fugitive'
 Plugin 'blueyed/vim-diminactive'
 Plugin 'tpope/vim-surround'
 Plugin 'christoomey/vim-tmux-navigator'
+Plugin 'yegappan/taglist' " visual view of code structure
 
 " make tab the universal code completer
 Plugin 'ervandew/supertab'            
@@ -47,15 +47,7 @@ call vundle#end()
 "filetype plugin indent on
 filetype plugin indent on
 
-" Use Ctrl-\ to open nerdtree
-function! OpenNerdTree()
-  if &modifiable && strlen(expand('%')) > 0 && !&diff
-    NERDTreeFind
-  else
-    NERDTreeToggle
-  endif
-endfunction
-nnoremap <silent> <C-\> :call OpenNerdTree()<CR>
+
 
 " ############# General Config ###########
 set number                      "Line numbers
@@ -143,7 +135,11 @@ nnoremap <silent> <leader>q :b#<bar>bd#<CR>
 nnoremap <silent> <C-T> :bd<CR>
 
 " copy current filename into system clipboard
-nnoremap <silent> <leader>cf :let @* = expand("%:~")<CR>
+nnoremap <silent> <leader>cf :let @*=expand("%") . ':' . line(".")<CR>
+
+" pretty format JSON file
+nnoremap <silent> <leader>jj :%!jq .<CR>
+
 
 "Quickfix List
 " remap ctrl-x and z to navigate quickfix error list
@@ -164,10 +160,24 @@ nnoremap <silent> <leader>f :CtrlPBufTag<CR>
 " Silver Searcher
 nnoremap <leader>gg :Ag ""<Left>
 
+" ############# Taglist ############
+nnoremap <silent> <C-S> :TlistToggle<CR>
+let Tlist_File_Fold_Auto_Close = 1
+
 " ############# NERDTree ############
 let NERDTreeMinimalUI = 1
 let NERDTreeDirArrows = 1
 let g:NERDTreeWinSize = 30
+
+" Use Ctrl-\ to open nerdtree
+function! OpenNerdTree()
+  if &modifiable && strlen(expand('%')) > 0 && !&diff
+    NERDTreeFind
+  else
+    NERDTreeToggle
+  endif
+endfunction
+nnoremap <silent> <C-\> :call OpenNerdTree()<CR>
 
 " ############# Syntastic ############
 " have syntastic be in passive mode by default
