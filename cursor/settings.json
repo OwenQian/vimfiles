@@ -1,0 +1,58 @@
+{
+    // General Cursor settings
+    "window.autoDetectColorScheme": true,
+    "editor.accessibilitySupport": "off",
+    "keyboard.dispatch": "keyCode",
+
+    // Go / gopls
+    "go.goroot": "/usr/local/go",
+    "go.gopath": "/Users/owen/go",
+    "go.toolsManagement.autoUpdate": true,
+    "go.alternateTools": {
+        "gopls": "/Users/owen/go/bin/gopls"
+    },
+    "gopls": {
+        "ui.completion.usePlaceholders": true
+    },
+    "terminal.integrated.env.osx": {
+        "PATH": "/usr/local/go/bin:/Users/owen/go/bin:${env:PATH}"
+    },
+
+    // Vim extension
+    "vim.normalModeKeyBindingsNonRecursive": [
+        // Route hjkl through VS Code cursor commands for key repeat, while
+        // keeping Vim count motions like 10j (unlike keybindings.json).
+        {
+            "before": ["h"],
+            "commands": ["cursorLeft"]
+        },
+        {
+            "before": ["j"],
+            "commands": ["cursorDown"]
+        },
+        {
+            "before": ["k"],
+            "commands": ["cursorUp"]
+        },
+        {
+            "before": ["l"],
+            "commands": ["cursorRight"]
+        },
+        {
+            "before": ["v", "v"],
+            "commands": ["workbench.action.splitEditorRight"]
+        },
+        {
+            "before": ["s", "s"],
+            "commands": ["workbench.action.splitEditorDown"]
+        },
+        {
+            "before": ["Q"],
+            "commands": ["workbench.action.closeActiveEditor"]
+        },
+        {
+            "before": ["g", "d"],
+            "commands": ["editor.action.revealDefinition"]
+        }
+    ]
+}
