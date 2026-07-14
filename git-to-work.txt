@@ -1,0 +1,11 @@
+git config --global alias.to-work '!f() { \
+  current_url=$(git remote get-url origin 2>/dev/null); \
+  if [ -z "$current_url" ]; then \
+    echo "Error: No remote named '\''origin'\'' found."; \
+    return 1; \
+  fi; \
+  new_url=$(echo "$current_url" | sed "s/github-personal.com/github.com/"); \
+  git remote set-url origin "$new_url"; \
+  echo "Remote reverted to default work configuration."; \
+  echo "New: $new_url"; \
+}; f'

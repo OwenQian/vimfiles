@@ -1,0 +1,16 @@
+git config --global alias.to-personal '!f() { \
+  current_url=$(git remote get-url origin 2>/dev/null); \
+  if [ -z "$current_url" ]; then \
+    echo "Error: No remote named '\''origin'\'' found."; \
+    return 1; \
+  fi; \
+  if echo "$current_url" | grep -q "github-personal.com"; then \
+    echo "Already configured for personal account."; \
+    return 0; \
+  fi; \
+  new_url=$(echo "$current_url" | sed "s/github.com/github-personal.com/"); \
+  git remote set-url origin "$new_url"; \
+  echo "Remote updated successfully!"; \
+  echo "Old: $current_url"; \
+  echo "New: $new_url"; \
+}; f'
