@@ -3,7 +3,36 @@
     "window.autoDetectColorScheme": true,
     "editor.accessibilitySupport": "off",
     "keyboard.dispatch": "keyCode",
-
+    // Editor behavior (ported from ~/.vimrc)
+    "editor.lineNumbers": "relative",
+    "editor.cursorSurroundingLines": 8,
+    "editor.cursorBlinking": "solid",
+    "editor.wordWrap": "off",
+    "editor.tabSize": 4,
+    "editor.insertSpaces": true,
+    "editor.detectIndentation": false,
+    "files.trimTrailingWhitespace": true,
+    "files.autoSave": "afterDelay",
+    "files.autoSaveDelay": 1000,
+    // Vim behavior (ported from ~/.vimrc)
+    "vim.leader": ",",
+    "vim.hlsearch": true,
+    "vim.incsearch": true,
+    "vim.ignorecase": true,
+    "vim.smartcase": true,
+    "vim.surround": true,
+    "vim.sneak": true,
+    "vim.camelCaseMotion.enable": true,
+    // Hide nested git worktree checkouts from the active workspace
+    "files.exclude": {
+        "**/.worktrees": true
+    },
+    "search.exclude": {
+        "**/.worktrees": true
+    },
+    "files.watcherExclude": {
+        "**/.worktrees/**": true
+    },
     // Go / gopls
     "go.goroot": "/usr/local/go",
     "go.gopath": "/Users/owen/go",
@@ -12,47 +41,284 @@
         "gopls": "/Users/owen/go/bin/gopls"
     },
     "gopls": {
-        "ui.completion.usePlaceholders": true
+        "ui.completion.usePlaceholders": true,
+        "directoryFilters": ["-.worktrees"]
     },
     "terminal.integrated.env.osx": {
         "PATH": "/usr/local/go/bin:/Users/owen/go/bin:${env:PATH}"
     },
-
     // Vim extension
     "vim.normalModeKeyBindingsNonRecursive": [
         // Route hjkl through VS Code cursor commands for key repeat, while
         // keeping Vim count motions like 10j (unlike keybindings.json).
         {
-            "before": ["h"],
-            "commands": ["cursorLeft"]
+            "before": [
+                "h"
+            ],
+            "commands": [
+                "cursorLeft"
+            ]
         },
         {
-            "before": ["j"],
-            "commands": ["cursorDown"]
+            "before": [
+                "j"
+            ],
+            "commands": [
+                "cursorDown"
+            ]
         },
         {
-            "before": ["k"],
-            "commands": ["cursorUp"]
+            "before": [
+                "k"
+            ],
+            "commands": [
+                "cursorUp"
+            ]
         },
         {
-            "before": ["l"],
-            "commands": ["cursorRight"]
+            "before": [
+                "l"
+            ],
+            "commands": [
+                "cursorRight"
+            ]
         },
         {
-            "before": ["v", "v"],
-            "commands": ["workbench.action.splitEditorRight"]
+            "before": [
+                "v",
+                "v"
+            ],
+            "commands": [
+                "workbench.action.splitEditorRight"
+            ]
         },
         {
-            "before": ["s", "s"],
-            "commands": ["workbench.action.splitEditorDown"]
+            "before": [
+                "s",
+                "s"
+            ],
+            "commands": [
+                "workbench.action.splitEditorDown"
+            ]
         },
         {
-            "before": ["Q"],
-            "commands": ["workbench.action.closeActiveEditor"]
+            "before": [
+                "Q"
+            ],
+            "commands": [
+                "workbench.action.closeActiveEditor"
+            ]
         },
         {
-            "before": ["g", "d"],
-            "commands": ["editor.action.revealDefinition"]
+            "before": [
+                "g",
+                "d"
+            ],
+            "commands": [
+                "editor.action.revealDefinition"
+            ]
+        },
+        {
+            "before": [
+                "<C-o>"
+            ],
+            "commands": [
+                "workbench.action.navigateBack"
+            ]
+        },
+        {
+            "before": [
+                "<C-i>"
+            ],
+            "commands": [
+                "workbench.action.navigateForward"
+            ]
+        },
+        {
+            "before": [
+                "0"
+            ],
+            "after": [
+                "^"
+            ]
+        },
+        {
+            "before": [
+                "^"
+            ],
+            "after": [
+                "0"
+            ]
+        },
+        {
+            "before": [
+                "/",
+                "/"
+            ],
+            "commands": [
+                ":nohl"
+            ]
+        },
+        {
+            "before": [
+                "<leader>",
+                "."
+            ],
+            "after": [
+                "'",
+                "."
+            ]
+        },
+        {
+            "before": [
+                "<leader>",
+                "t"
+            ],
+            "commands": [
+                "workbench.action.quickOpen"
+            ]
+        },
+        {
+            "before": [
+                "<leader>",
+                "o"
+            ],
+            "commands": [
+                "workbench.action.showAllEditors"
+            ]
+        },
+        {
+            "before": [
+                "<leader>",
+                "g",
+                "g"
+            ],
+            "commands": [
+                "workbench.action.findInFiles"
+            ]
+        },
+        {
+            "before": [
+                "<leader>",
+                "z"
+            ],
+            "commands": [
+                "workbench.action.previousEditor"
+            ]
+        },
+        {
+            "before": [
+                "<leader>",
+                "x"
+            ],
+            "commands": [
+                "workbench.action.nextEditor"
+            ]
+        },
+        {
+            "before": [
+                "<leader>",
+                "a"
+            ],
+            "commands": [
+                "workbench.action.openPreviousRecentlyUsedEditorInGroup"
+            ]
+        },
+        {
+            "before": [
+                "<C-\\>"
+            ],
+            "commands": [
+                "revealInExplorer"
+            ]
+        },
+        {
+            "before": [
+                "W"
+            ],
+            "after": [
+                "<leader>",
+                "w"
+            ]
+        },
+        {
+            "before": [
+                "B"
+            ],
+            "after": [
+                "<leader>",
+                "b"
+            ]
+        },
+        {
+            "before": [
+                "E"
+            ],
+            "after": [
+                "<leader>",
+                "e"
+            ]
         }
-    ]
+    ],
+    "vim.visualModeKeyBindingsNonRecursive": [
+        {
+            "before": [
+                "W"
+            ],
+            "after": [
+                "<leader>",
+                "w"
+            ]
+        },
+        {
+            "before": [
+                "B"
+            ],
+            "after": [
+                "<leader>",
+                "b"
+            ]
+        },
+        {
+            "before": [
+                "E"
+            ],
+            "after": [
+                "<leader>",
+                "e"
+            ]
+        }
+    ],
+    "vim.operatorPendingModeKeyBindingsNonRecursive": [
+        {
+            "before": [
+                "W"
+            ],
+            "after": [
+                "<leader>",
+                "w"
+            ]
+        },
+        {
+            "before": [
+                "B"
+            ],
+            "after": [
+                "<leader>",
+                "b"
+            ]
+        },
+        {
+            "before": [
+                "E"
+            ],
+            "after": [
+                "<leader>",
+                "e"
+            ]
+        }
+    ],
+    "editor.fontFamily": "Codelia Ligatures, TX-02, Menlo, Monaco, 'Courier New', monospace",
+    "editor.fontSize": 14,
+    "git.autofetch": true
 }

@@ -1,0 +1,10 @@
+[
+    {
+        "key": "cmd+shift+s",
+        "command": "workbench.action.toggleSidebarVisibility"
+    },
+    {
+        "key": "cmd+shift+e",
+        "command": "revealInExplorer"
+    }
+]
